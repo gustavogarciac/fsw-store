@@ -14,9 +14,4 @@ export const sidebarLinks = [
     route: "/catalog",
     icon: "/assets/icons/list.svg",
   },
-  {
-    label: "Log In",
-    route: "/sign-in",
-    icon: "/assets/icons/log-in.svg",
-  },
 ];
