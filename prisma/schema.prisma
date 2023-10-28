@@ -25,7 +25,7 @@ model Product {
   slug            String
   description     String
   basePrice       Decimal  @db.Decimal(8, 2) //max 8 casas antes vírgula e max 2 dps da vírgula.
-  imageUrl        String
+  imageUrls       String[]
   category        Category @relation(fields: [categoryId], references: [id])
   categoryId      String
   discountPercent Int      @default(0)
