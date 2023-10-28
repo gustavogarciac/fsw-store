@@ -12,7 +12,7 @@ const Header = () => {
       <Sidebar />
 
       <h1 className="text-xl font-semibold">
-        <strong className="text-purple-700">FSW</strong> Store
+        <strong className="text-purple-700">Tech</strong> Store
       </h1>
 
       <Button size="icon" variant={"outline"}>
