@@ -20,7 +20,10 @@ const Product = ({
   discountPercent,
 }: Props) => {
   return (
-    <Link href={`/product/${slug}`} className="flex flex-col gap-4 w-full">
+    <Link
+      href={`/product/${slug}`}
+      className="flex flex-col gap-4 w-full min-w-[200px]"
+    >
       <div className="relative p-4 bg-zinc-900 aspect-square flex justify-center items-center rounded-md group">
         <Image
           src={imageUrls[0]}
