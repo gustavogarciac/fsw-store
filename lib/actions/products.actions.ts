@@ -14,3 +14,33 @@ export async function fetchAllProducts() {
     throw error;
   }
 }
+
+export async function fetchAllProductsByCategory() {
+  try {
+    const keyboards = await prismaClient.product.findMany({
+      where: {
+        category: {
+          slug: "keyboards",
+        },
+      },
+    });
+
+    const mouses = await prismaClient.product.findMany({
+      where: {
+        category: {
+          slug: "mouses",
+        },
+      },
+    });
+
+    const offers = await prismaClient.product.findMany({
+      where: {
+        discountPercent: {
+          gt: 0,
+        },
+      },
+    });
+
+    return { keyboards, mouses, offers };
+  } catch (error) {}
+}
