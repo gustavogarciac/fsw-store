@@ -16,7 +16,7 @@ const Home = async () => {
   const products = await fetchAllProductsByCategory();
 
   return (
-    <div className="flex flex-col gap-4 px-5">
+    <>
       {/* Image Banner */}
       <div className="flex items-center gap-6 justify-center bg-gradient-to-r from-purple-500 to-purple-800 mt-4 rounded-md p-4">
         <h1 className="text-lg max-w-[50%] text-center">
@@ -135,7 +135,7 @@ const Home = async () => {
           ))}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
