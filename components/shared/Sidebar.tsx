@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import {
   Sheet,
@@ -13,9 +15,11 @@ import { MenuIcon } from "lucide-react";
 import { Button } from "../ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Separator } from "../ui/separator";
+import { usePathname } from "next/navigation";
 
 const Sidebar = () => {
   const user = useUser();
+  const pathname = usePathname();
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -54,17 +58,32 @@ const Sidebar = () => {
 
         <Separator />
 
-        <div className="mt-2 space-y-4">
-          {sidebarLinks.map((link) => (
-            <Button
-              className="w-full justify-start gap-2"
-              variant={"outline"}
-              key={link.label}
-            >
-              <Image width={20} height={20} alt={link.label} src={link.icon} />
-              {link.label}
-            </Button>
-          ))}
+        <div className="mt-2 flex flex-col gap-3">
+          {sidebarLinks.map((link) => {
+            const isActive =
+              (pathname.includes(link.route) && link.route.length > 1) ||
+              pathname === link.route;
+
+            return (
+              <Link href={link.route}>
+                <Button
+                  className={`w-full justify-start gap-2 ${
+                    isActive && "bg-purple-800 hover:bg-purple-900"
+                  }`}
+                  variant={"outline"}
+                  key={link.label}
+                >
+                  <Image
+                    width={20}
+                    height={20}
+                    alt={link.label}
+                    src={link.icon}
+                  />
+                  {link.label}
+                </Button>
+              </Link>
+            );
+          })}
 
           <SignedIn>
             <SignOutButton>
