@@ -1,7 +1,11 @@
 "use server";
 
 import { prismaClient } from "../prisma";
-import { FetchProductsByCategory } from "./shared.types";
+import {
+  FetchProductBySlug,
+  FetchProductsByCategory,
+  FetchRelatedProducts,
+} from "./shared.types";
 
 export async function fetchAllProducts() {
   try {
@@ -10,6 +14,23 @@ export async function fetchAllProducts() {
       throw new Error("No products found!");
     }
     return products;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+export async function fetchProductBySlug(params: FetchProductBySlug) {
+  try {
+    const { slug } = params;
+
+    const product = await prismaClient.product.findFirstOrThrow({
+      where: {
+        slug,
+      },
+    });
+
+    return product;
   } catch (error) {
     console.log(error);
     throw error;
@@ -43,7 +64,10 @@ export async function fetchAllProductsByCategory() {
     });
 
     return { keyboards, mouses, offers };
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
 }
 
 export async function fetchProductByCategory(params: FetchProductsByCategory) {
@@ -63,5 +87,44 @@ export async function fetchProductByCategory(params: FetchProductsByCategory) {
     }
 
     return products;
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+export async function fetchRelatedProducts(params: FetchRelatedProducts) {
+  try {
+    const { slug } = params;
+
+    const product = await prismaClient.product.findFirst({
+      where: {
+        slug,
+      },
+    });
+
+    if (!product) {
+      throw new Error("Cannot find product by slug");
+    }
+
+    const relatedProducts = await prismaClient.product.findMany({
+      where: {
+        slug: {
+          not: slug,
+        },
+        category: {
+          id: product?.categoryId,
+        },
+      },
+    });
+
+    if (!relatedProducts) {
+      return [];
+    }
+
+    return relatedProducts;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
 }

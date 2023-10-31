@@ -24,7 +24,7 @@ const Product = ({
       href={`/product/${slug}`}
       className="flex flex-col gap-4 w-full min-w-[200px]"
     >
-      <div className="relative p-4 bg-zinc-900 aspect-square flex justify-center items-center rounded-md group">
+      <div className="relative p-4 bg-zinc-900 aspect-square flex justify-center items-center rounded-md group overflow-hidden">
         <Image
           src={imageUrls[0]}
           alt={`${slug} image`}
