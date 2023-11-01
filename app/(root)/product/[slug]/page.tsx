@@ -8,6 +8,7 @@ import { calculateDiscountPrice } from "@/lib/utils";
 import { ArrowDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ProductSlide from "@/components/shared/ProductSlide";
+import ImageGallery from "@/components/shared/ImageGallery";
 
 const Page = async ({ params }: { params: { slug: string } }) => {
   const product = await fetchProductBySlug({
@@ -20,33 +21,8 @@ const Page = async ({ params }: { params: { slug: string } }) => {
 
   return (
     <div>
-      {/* TODO: TOGGLE BETWEEN IMAGES */}
-      {/* Main Image */}
-      <div className="w-full aspect-square flex justify-center items-center bg-zinc-800 mt-6 rounded-md">
-        <Image
-          src={product?.imageUrls[0]}
-          alt={product?.name}
-          width={300}
-          height={300}
-        />
-      </div>
-
       {/* Image Gallery */}
-      <div className="flex flex-row gap-2">
-        {product?.imageUrls.map((imageUrl) => (
-          <div
-            className="w-full aspect-square flex justify-center items-center bg-zinc-800 mt-3 rounded-md overflow-x-auto hover:border-purple-800  border"
-            key={imageUrl.length}
-          >
-            <Image
-              src={imageUrl}
-              alt={product?.name}
-              width={100}
-              height={100}
-            />
-          </div>
-        ))}
-      </div>
+      <ImageGallery images={product?.imageUrls} name={product?.name} />
 
       {/* Product Title */}
       <div className="mt-6">
