@@ -3,9 +3,10 @@
 import React from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "../ui/button";
-import { ShoppingCart } from "lucide-react";
+
 import Link from "next/link";
 import Sidebar from "./Sidebar";
+import Cart from "./Cart";
 
 const Header = () => {
   return (
@@ -18,9 +19,7 @@ const Header = () => {
         </h1>
       </Link>
 
-      <Button size="icon" variant={"outline"}>
-        <ShoppingCart />
-      </Button>
+      <Cart />
     </Card>
   );
 };

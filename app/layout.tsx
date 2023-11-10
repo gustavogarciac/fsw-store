@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/shared/Header";
-import { AuthProvider } from "@/providers/auth";
 import { ClerkProvider } from "@clerk/nextjs";
+import { CartContextProvider } from "@/contexts/CartContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,9 +18,11 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="en">
-        <body className={`${inter.className}`}>{children}</body>
-      </html>
+      <CartContextProvider>
+        <html lang="en">
+          <body className={`${inter.className}`}>{children}</body>
+        </html>
+      </CartContextProvider>
     </ClerkProvider>
   );
 }
