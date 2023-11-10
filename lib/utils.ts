@@ -10,11 +10,11 @@ export function calculateDiscountPrice({
   basePrice,
   discountPercent,
 }: {
-  basePrice: Decimal;
+  basePrice: number;
   discountPercent: number;
 }) {
-  const priceWithDiscount =
-    basePrice.toNumber() - basePrice.toNumber() * (discountPercent / 100);
+  console.log(basePrice, discountPercent);
+  const priceWithDiscount = basePrice - basePrice * (discountPercent / 100);
 
   return priceWithDiscount;
 }
