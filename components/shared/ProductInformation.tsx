@@ -5,13 +5,15 @@ import { ArrowDown, ChevronLeft, ChevronRight } from "lucide-react";
 import React, { useState } from "react";
 import { Button } from "../ui/button";
 import Image from "next/image";
+import { useCartContext } from "@/contexts/CartContext";
 
 interface Props {
   name: string;
-  slug: string;
   description: string;
   basePrice: number;
   discountPercent: number;
+  imageUrl: string;
+  id: string;
 }
 
 const ProductInformation = ({
@@ -19,9 +21,11 @@ const ProductInformation = ({
   description,
   discountPercent,
   name,
-  slug,
+  imageUrl,
+  id,
 }: Props) => {
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
+  const { addProductToCart } = useCartContext();
 
   function handleQuantityChange(sum: boolean) {
     if (sum) {
@@ -29,7 +33,7 @@ const ProductInformation = ({
         setQuantity(quantity + 1);
       }
     } else {
-      if (quantity > 0) {
+      if (quantity > 1) {
         setQuantity(quantity - 1);
       }
     }
@@ -97,7 +101,19 @@ const ProductInformation = ({
 
       {/* CTA */}
       <div className="mt-6">
-        <Button className="w-full bg-purple-700 hover:bg-purple-800 min-h-[56px] uppercase text-lg font-bold">
+        <Button
+          onClick={() =>
+            addProductToCart({
+              basePrice,
+              discountPercent,
+              imageUrl,
+              name,
+              quantity,
+              id,
+            })
+          }
+          className="w-full bg-purple-700 hover:bg-purple-800 min-h-[56px] uppercase text-lg font-bold"
+        >
           Add to Cart
         </Button>
 

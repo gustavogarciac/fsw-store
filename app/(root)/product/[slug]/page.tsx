@@ -29,7 +29,8 @@ const Page = async ({ params }: { params: { slug: string } }) => {
         description={product?.description}
         discountPercent={product?.discountPercent}
         name={product?.name}
-        slug={product?.slug}
+        imageUrl={product?.imageUrls[0]}
+        id={product?.id}
       />
 
       <ProductSlide

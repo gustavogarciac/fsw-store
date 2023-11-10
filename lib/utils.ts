@@ -13,7 +13,6 @@ export function calculateDiscountPrice({
   basePrice: number;
   discountPercent: number;
 }) {
-  console.log(basePrice, discountPercent);
   const priceWithDiscount = basePrice - basePrice * (discountPercent / 100);
 
   return priceWithDiscount;
